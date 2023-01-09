@@ -1,0 +1,1055 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta name="description" content="Look up multiple words quickly. Simply copy and paste a list with any delimeter. Definitions/synonyms are immediately available for viewing, emailing, or downloading."/>
+ <!--This website is designed to aid students in vocabulary memorization by decreasing the time required to look up a large lis
+ t of words. It includes a comprehensive dictionary that allows for fast and quick lookup of words.-->
+
+<meta name="keywords" content="define multiple, multiple words at once, define quickly, multiple words quickly, words at once, vocabulary, easy, fast, dictionary, list, vocab, forms of definitions, definitions, plural words, parser, quick define, define, easydefine, look up, words, test prep, multiple, at once, quick, SAT, GRE, look up multiple words at once, define multiple words at once, quickly look up words, word look up, fast, english homework, vocab, vocabulary look up" />
+<meta name="verify-v1" content="AUJM8VKgN27eGnEUrAdIUNFuLloSDebrFITeO8PEWsk=" />
+
+<title>EasyDefine - Define multiple words quickly</title>
+
+
+
+
+
+
+
+<link rel="shortcut icon" href="easydefinefavico.ico" type="image/x-icon" />
+<link rel="stylesheet" href="css/basic.css" type="text/css" />
+<link rel="stylesheet" href="css/slick.css" type="text/css" />
+<link rel="stylesheet" href="css/list.css" type="text/css" />
+<style type ="text/css">
+
+
+
+table{
+
+font-family: Arial;
+border-collapse: collapse;
+
+}
+th {
+	padding: 0.5em;
+	text-align: center;
+	border-top: 1px solid #888;
+	border-bottom: 1px solid #888;
+
+
+	}
+td {
+	font-size:12px;
+	border-bottom: 1px solid #333;
+	padding: 1em;
+	}
+
+td .button-remove
+{
+display:none;
+}
+
+#tableforads{
+width:100%;
+
+}
+
+#tableforads tr td
+{
+border:none;
+outline:none;
+padding:none;
+align:center;
+vertical-align:top;
+}
+
+
+
+#showonfocus {
+display:none;
+}
+
+
+#lost_pwd, #back_login {
+font-family:Arial;
+clear:right;
+display:block;
+float:left;
+font-size:0.95em;
+padding:15px 5px 0;
+text-decoration:underline;
+}
+
+#pretty
+{
+font-family:Verdana, Arial;
+font-size:9px;
+color:#e3e9ec;
+}
+
+textarea{display: block; font-family:Verdana,Arial;font-size:13px;}
+
+
+input {text-decoration:none;outline: 0;}
+        .activeField
+        {
+            background-image: none;
+            background-color: #ffffff;
+            border: solid 1px #33677F;
+        }
+        .idle
+        {
+	    border: solid 1px #85b1de;
+	    background-image: url( 'images/blue.png' );
+	    background-repeat: repeat-x;
+	    background-position: top;
+        }
+
+
+a {
+outline:0;
+text-decoration: none;
+}
+a img {display:block;  text-decoration:none}
+a:link {color: #565051; text-decoration:none;
+}     /* unvisited link */
+a:hover {color: #FF0000;  text-decoration:none;
+}   /* mouse over link */
+a:active {color: #C0C0C0; text-decoration:none;outline: 0;
+}   /* selected link */
+
+#new
+{
+font-size:9px;
+
+width:310px;
+padding:10px;
+}
+
+a#submitquiz, a#showAnswersForQuiz
+{
+font-size:20px;
+padding:10px;
+text-decoration:none;
+}
+</style>
+
+<script type="text/javascript" src = "modules/jquery/jquery.js"></script>
+<script type="text/javascript" src="modules/jquery/jquery.simplemodal.js"></script>
+<script type="text/javascript" src = "modules/jquery/corner.js"></script>
+<script type="text/javascript" src = "modules/jquery/ajax.js"></script>
+
+
+
+    <link rel="stylesheet" type="text/css" href="login_panel/css/slide.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="demo.css" media="screen" />
+
+
+    <!-- PNG FIX for IE6 -->
+    <!-- http://24ways.org/2007/supersleight-transparent-png-in-ie6 -->
+    <!--[if lte IE 6]>
+        <script type="text/javascript" src="login_panel/js/pngfix/supersleight-min.js"></script>
+    <![endif]-->
+
+    <script src="login_panel/js/slide.js" type="text/javascript"></script>
+
+
+
+
+<script type="text/javascript">
+<!--
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+-->
+</script>
+<script type="text/javascript">
+<!--
+try {
+var pageTracker = _gat._getTracker("UA-7220451-2");
+pageTracker._trackPageview();
+} catch(err) {}
+-->
+</script>
+
+<script type="text/javascript">
+<!--
+//Browser Support Code
+
+$(document).ready(function() {
+$('#p1').focus();
+var check = false;
+
+    $("textarea").addClass("idle");
+            $("textarea").focus(function(){
+                $(this).addClass("activeField").removeClass("idle");
+	    }).blur(function(){
+                $(this).removeClass("activeField").addClass("idle");
+	    });
+$("#advancedopts").hide();
+$("#emailassoc").hide();
+$("#load").hide();
+$("#replace_syn").hide();
+
+
+	if($('input[name=numlist]').is(':checked'))
+	 $("#numlistshow").show();
+	else
+	 $("#numlistshow").hide();
+
+
+$('a#modal').click(function (e) {
+	e.preventDefault();
+	$('#advancedopts').modal({onOpen: modalOpen , onClose: modalClose, persist:true, escClose:false});
+});
+$('img#email12').click(function (e) {
+	e.preventDefault();
+	$('#emailassoc').modal({onOpen: modalOpen , onClose: modalClose,
+	containerCss: {
+    height: 180,
+    width: 280,
+	background:'url(css/bg1.png) no-repeat'}
+	});
+});
+
+$('img#email1').click(function (e) {
+	e.preventDefault();
+	$('#emailassoc').modal({onOpen: modalOpen , onClose: modalClose,
+	containerCss: {
+    height: 180,
+    width: 280,
+	background:'url(css/bg1.png) no-repeat'}
+	});
+});
+		var content_show = 'Home';
+		// When a link is clicked
+		$("a.tab").click(function () {
+
+
+			// switch all tabs off
+			$(".active").removeClass("active");
+
+			// switch this tab on
+			$(this).addClass("active");
+
+			// slide all content up
+			$(".content").hide();
+
+			// slide this content up
+			content_show = $(this).attr("title");
+			 content_show = content_show.replace(/ /g,"_");
+
+			if(content_show == 'List')
+			   ajaxFunction(0);
+			if(content_show == 'Extras')
+			  {
+			  $('#content_container').hide();
+			  $('#container').show();
+
+			  }
+			if(content_show == 'Home')
+			   ajaxFunction4();
+			$("#"+content_show).show();
+
+		});
+
+		$('#ima').click(function() {
+			   ajaxFunction(0);
+		    $(".active").removeClass("active");
+
+			// switch this tab on
+			$('#c2').addClass("active");
+
+			// slide all content up
+			$(".content").hide();
+
+			// slide this content up
+			$("#List").show();
+		});
+
+		$("#numlist").click(function(){
+
+			if($('input[name=numlist]').is(':checked'))
+			 $("#numlistshow").show();
+			else
+			$("#numlistshow").hide();
+
+		});
+
+		$('#emailconf').click(function(){
+		//alert(jQuery.trim($("#p1").val()));
+		if(jQuery.trim($("#p1").val()) != "")
+		 {
+
+		$('#conf').html('<div align="center"><img src = "images/ajax-loader.gif"  border="0" alt="Loading..." /></div>');
+		 $.ajax ({
+			type:"POST",
+			url: "?p=email",
+			data: "to=" + $("#to").val(),
+			success: function(msg) {
+			    $('#conf').html(msg);
+				}
+			});
+
+		 }
+		else
+		  $("#conf").html("Please define some words before emailing. <br /><br />");
+		});
+
+
+		$('#clo').click(function(){
+		  if(jQuery.trim($('#max').val()).match(/([0-9]+)|(^\s{0}$)/))
+		    $('#close12').click();
+	      else
+		    alert("Please enter a valid input for maximum number of definitions per word.");
+		});
+
+		$('#quick').click(function(){
+		  ajaxFunction(2);
+		});
+
+		$('#back').click(function(){
+			  $('#content_container').fadeOut('slow', function () {
+			  $('#container').fadeIn('slow');
+			});
+		});
+
+
+		$('#back1').hide();
+		$('#back1').click(function(){
+			  $('#content_here').fadeOut('slow', function () {
+			  $('#quizlinks').fadeIn('slow');
+			  $('#back1').hide();
+			  $('#back').show();
+			  $('#submitquiz').hide();
+			  $('#showAnswersForQuiz').hide();
+			});
+		});
+
+
+		$('#list li a').click(function(){
+			$('#back1').hide();
+			$('#back').show();
+			$('#submitquiz').hide();
+			$('#showAnswersForQuiz').hide();
+			$('#content_here').html("");
+			$('#title_for_tab').html($(this).html() + ($(this).html() == 'Generate flashcards' || $(this).html() == 'Generate worksheets' ? "<br /> <span style='font-size:10px'>ANSWERS INCLUDED</span>":""));
+			$('#links').hide();
+			$("#quizlinks").hide();
+			if($(this).html() == 'Synonyms')
+			{
+			ajaxFunction3("Syn",0,"");
+			$("#container").fadeOut('medium', function () {
+            $('#content_container').fadeIn('slow');
+			$('#content_here').show();
+          });
+
+				//$('#container').fadeOut('medium');
+				//$('#content_container').fadeIn('slow');
+
+				$('#imagesToFadeOut').show();
+			}
+
+			if($(this).html() == 'Generate flashcards')
+			{
+				ajaxFunction3('flal',0,"flashcards");
+				//$(this).click();
+				return false;
+			}
+			if($(this).html() == 'Quiz Yourself')
+			{
+			$('#imagesToFadeOut').hide();
+			$("#container").fadeOut('medium',
+			function () {
+			  $('#content_container').fadeIn('slow');
+			  $("#quizlinks").show();
+			  $('#submitquiz').hide();
+			  $('#showAnswersForQuiz').hide();
+				});
+
+
+				//$(this).click();
+				return false;
+			}
+			if($(this).html() == 'Generate worksheets')
+			{
+				$('#container').fadeOut('medium', function () {
+					$('#content_container').fadeIn('slow');
+				});
+
+				$('#imagesToFadeOut').hide();
+				$('#links').fadeIn('slow');
+			}
+
+
+		});
+
+	$('#list1 li a').click(function() {
+			return false;
+	});
+
+	var quizid="";
+	var lessThan5Msg = "";
+	$('#quizlinks a').click(function() {
+		//$('#content_here').load('modules/make_def_tf.php');
+		 urltosend = '?p=' + $(this).attr("id");
+		 quizid= $(this).attr("id");
+		 url1 = ($(this).attr("id") == "quiz1" || $(this).attr("id") == "quiz2" || $(this).attr("id") == "quiz3") ? "modules/make_flashcards.inc.php" : "modules/make_synonyms.inc.php";
+
+			$('#loadingbox').html('<div align="center"><img src = "images/load.gif"  border="0" alt="Loading..." /></div>');
+
+			$.ajax ({
+			type:"POST",
+			url: url1,
+			data: "par1=" + encodeURIComponent(document.getElementById('p1').value) + "&numlist=" + document.getElementById("numlist").checked + "&random=" + document.getElementById("random").checked + "&check=" + document.getElementById("numlist").checked + "&alpha=" + document.getElementById("alpha").checked +"&numlistyn=" + getRadioVal() + "&max=" +  document.getElementById("max").value + "&partof=" + document.getElementById("partof").checked +"&ht=1",
+			success: function(msg) {
+				$('#content_here').load(urltosend,function(response,status,xhr){lessThan5Msg = response; $('#content_here').show(); $('#submitquiz').show(); if(lessThan5Msg.trim() == "<h2>You must have more than 5 unique words to generate a multiple choice quiz.</h2>"){$('#submitquiz').hide(); $('#showAnswersForQuiz').hide();} else {$('#submitquiz').show();}});
+
+				$('#quizlinks').hide();
+				$('#back').hide();
+				$('#back1').show();
+				$('#loadingbox').html('');
+				}
+			});
+			//$('#content_here').append($('#content_here').load("modules/check_answers.php"));
+
+
+
+			/* $.ajax ({
+			type:"POST",
+			url: "?p=quiz1",
+			data: "ht=1",
+			success: function(msg) {
+				//alert(msg);
+				$('#content_here').html(msg);
+				}
+			}); */
+
+			return false;
+	});
+
+
+	$('#showAnswersForQuiz').click(function() {
+			//alert($('input[name=match0]').val());
+			//alert($('#quiztable div').length);
+			$('#loadingbox1').html('<div align="center"><img src = "images/load.gif"  border="0" alt="Loading..." /></div>');
+
+
+			$('#content_here').hide();
+
+			$.ajax ({
+			type:"POST",
+			url: "?p=" + quizid,
+			data: 'answers=True',
+			success: function(msg) {
+				//alert(msg);
+				$('#loadingbox1').html('');
+				$('#content_here').html(msg);
+				$('#content_here').slideDown();
+				$('#submitquiz').hide();
+				$('#showAnswersForQuiz').hide();
+				}
+			});
+
+			return false;
+		});
+
+
+	$('#submitquiz').click(function() {
+			//alert($('input[name=match0]').val());
+			//alert($('#quiztable div').length);
+			$('#loadingbox1').html('<div align="center"><img src = "images/load.gif"  border="0" alt="Loading..." /></div>');
+
+			var str = "";
+			var length = 0;
+			if(quizid == "quiz1" || quizid == "quiz4")
+			{
+				length = $('#quiztable tr').size() - 1;
+				str = "match"
+			}
+			if(quizid == "quiz2" || quizid == "quiz5")
+			{
+				length = $('#quiztable input').size()/2;
+				str = "tf"
+			}
+			if(quizid == "quiz3" || quizid == "quiz6")
+			{
+				length = $('#quiztable input').size()/5;
+				str="mc";
+			}
+
+				//alert(length);
+			dataForQuiz = str + "=True&" + str + "0";
+
+			for (var i = 0; i < length; i++)
+			{
+			  var tempans = str == "match" ? $('input[name=' + str + i + ']').val() : $('input[name=' + str + i + ']:checked').val() ;
+			  dataForQuiz += i != length - 1 ? "=" + tempans + "&" + str + (i+1) : "=" + tempans;
+			}
+
+			//alert(dataForQuiz);
+			$('#content_here').hide();
+
+			$.ajax ({
+			type:"POST",
+			url: "?p=" + quizid,
+			data: dataForQuiz,
+			success: function(msg) {
+				//alert(msg);
+				$('#loadingbox1').html('');
+				$('#content_here').html(msg);
+				$('#content_here').slideDown();
+				$('#showAnswersForQuiz').show();
+				}
+			});
+
+			return false;
+		});
+
+
+
+		$('#container1 button').click(function() {
+			ajaxFunction3($(this).parent().find('a').attr('class'), $(this).attr('class'),$(this).parent().find('a').attr('id'));
+			return false;
+		});
+
+
+		$('#list1 li').hover( function () {
+			jQuery("button", this).show();
+		},
+		function () {
+			jQuery("button", this).hide();
+		 }
+
+		);
+		$('#send_email').hide();
+
+		$('#lost_pwd').click(function() {
+
+			$('#member_login').fadeOut('medium', function () {
+				$('#login_change').html('Change Your Password');
+				$('#send_email').fadeIn('medium');
+
+			});
+
+		});
+
+		$('#back_login').click(function() {
+			$('#send_email').fadeOut('medium', function () {
+				$('#login_change').html('Member Login');
+				$('#member_login').fadeIn('medium');
+
+			});
+		});
+
+		$('.rem').click(function() {
+		 if (confirm('Are you sure you want to delete this list?'))
+			return true;
+		 else
+			return false;
+		});
+		var a;
+		$('.bt_login').hover(
+		function() {
+		$(this).css('color','#005');
+		a = $(this).val();
+		$(this).attr('value',' ' + $(this).val());
+		},
+		function() {
+		$(this).css('color','#000');
+		$(this).attr('value',a);
+		}
+		);
+
+		$('.bt_register').hover(
+		function() {
+		$(this).css('color','#000');
+		},
+		function() {
+		$(this).css('color','#fff');
+		}
+
+		);
+
+		$('#max').focus(
+		function () {
+		$('#showonfocus').show();
+		}
+		);
+
+		$('#max').blur(
+		function () {
+		if($('#max').val() == "")
+			$('#showonfocus').hide();
+		}
+		);
+
+		$('#wordliststorecheck').click(
+			function() {
+				return content_show == 'Home';
+			});
+
+});
+
+-->
+</script>
+ 
+
+</head>
+<body>
+
+
+<noscript>
+<!--  <meta http-equiv="refresh" content="0; URL=enable_javascript.php" /> -->
+<div style="padding-left:5px;">
+<h1>To use EasyDefine you must have javascript enabled.</h1>
+<b>Are you using a browser that doesn't support JavaScript? </b>
+<br />
+If your browser does not support JavaScript, you can upgrade to a newer browser, such as <a href="http://www.mozilla.com/en-US/firefox/upgrade.html">Mozilla Firefox</a> or <a href="http://www.microsoft.com/windows/internet-explorer/default.aspx">Internet Explorer</a> or <a href="http://www.google.com/chrome"> Chrome </a>.
+<br /><br /><br/><br />
+<b> Have you disabled JavaScript? </b>
+<h3>If you have disabled JavaScript, you must re-enable JavaScript to use this page. To enable JavaScript, please go to  <a href="http://www.iatn.net/help/javascript/">Instructions</a></h3>
+</div>
+</noscript>
+
+
+
+
+
+
+<div id = "header" style="position:relative;text-align:left; margin:0; padding:0; z-index:100; background:url('images/topbar/topbarbg.jpg') repeat-x scroll 0 0 #000000; height:36px; width:100%;">
+
+	<div style="position:absolute; bottom:0">
+		<a href="http://www.easydefine.com" style="text-decoration:none;"><img border="0" src="images/topbar/easydefine_on.png" align="bottom" style="position:relative; float:left; margin-right:0; padding-right:0" /> </a>
+		<a href="/instadefine" style="text-decoration:none;"><img border="0" src="images/topbar/instadefine_off.png" align="bottom" style="position:relative; float:left;margin-left:-2px;"/> </a>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<div id="toppanel">
+	<div id="panel">
+		<div class="contentforbox clearfix">
+			<div class="left" style="height:275px;">
+				<h1>EasyDefine Account System</h1>
+				<h2>Save your word lists!</h2>
+				<p class="grey">By creating an account you have the ability to save your wordlists for use at a later time.</p>
+				<h2>Easy list management system</h2>
+				<p class="grey">Use the easy managment system to keep track of all your word lists.</p>
+				<br />
+
+								<div align="center">
+				<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+						<input type="hidden" name="cmd" value="_s-xclick">
+						<input type="hidden" name="hosted_button_id" value="UG76Z3573LGMJ">
+						<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+						<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+					</form>
+				</div>
+			</div>
+
+
+            
+			<div class="left" style="height:275px;">
+				<!-- Login Form -->
+				<form class="clearfix" action="" method="post">
+					<h1 id="login_change">Member Login</h1>
+                    <div id="member_login" >
+                    
+					<label class="grey" for="username">Username:</label>
+					<input class="field" type="text" name="username" id="username" value="" size="23" />
+
+					<label class="grey" for="password"> Password:</label>
+					<input class="field" type="password" name="password" id="password" size="23" />
+						            	<label><input name="rememberMe" id="rememberMe" type="checkbox" checked="checked" value="1" /> &nbsp;Remember me</label>
+        			<div class="clear"></div>
+					<input type="submit" name="submit" value="Login" class="bt_login" />
+
+					<a href="#" id="lost_pwd">Lost your password?</a>
+				</div>
+
+				<div id="send_email">
+											<label class="grey" for="forgetemail">Email:</label>
+						<input class="field" type="text" name="forgetemail" id="forgetemail" size="23" />
+						<input type="submit" name="submit" value="Email" class="bt_login" />
+						<a href="#" id="back_login">Back to login</a>
+
+				</div>
+				</form>
+			</div>
+			<div class="left right" style="height:275px;">
+				<!-- Register Form -->
+				<form action="" method="post">
+					<h1>Not a member yet? Sign Up!</h1>
+
+                    
+					<label class="grey" for="username">Username:</label>
+					<input class="field" type="text" name="username" id="username" value="" size="23" />
+					<label class="grey" for="email">Email:</label>
+					<input class="field" type="text" name="email" id="email" size="23" />
+					<label class="grey" for="email">Enter Email Again:</label>
+					<input class="field" type="text" name="emailcheck" id="emailcheck" size="23" />
+					<label>A temporary password will be e-mailed to you.</label>
+					<input type="submit" name="submit" value="Register" class="bt_register" />
+
+				</form>
+			</div>
+
+            		</div>
+
+	</div> <!-- /login -->
+
+    <!-- The tab on top -->
+	<div class="bigtab">
+		<ul class="login">
+	    	<li class="left">&nbsp;</li>
+	        <li>Hello Guest!</li>
+			<li class="sep">|</li>
+			<li id="toggle">
+				<a id="open" class="open" href="#">Log In | Register</a>
+				<a id="close" style="display: none;" class="close" href="#">Close Panel</a>
+			</li>
+	    	<li class="right">&nbsp;</li>
+		</ul>
+	</div> <!-- / top -->
+
+</div>
+
+
+
+
+<table id="tableforads">
+<tr><td width="25%">
+	<div align="center" style="margin-top:80px;">
+
+
+
+
+
+		<script type="text/javascript"><!--
+google_ad_client = "pub-9291870391995910";
+/* 300x250, created 7/1/10 */
+google_ad_slot = "9153954010";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+
+
+
+<br />
+		<br />
+		<br /><br />
+<script type="text/javascript"><!--
+google_ad_client = "pub-9291870391995910";
+/* 300x250, created 7/1/10 */
+google_ad_slot = "0286563066";
+google_ad_width = 300;
+google_ad_height = 250;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+
+	</div>
+</td>
+<td>
+<div style="">
+<form name="myform" action="" method="post">
+<a id='htmlredirect' href="" target = "_blank"></a>
+<br />
+<div align="center"><!--<img src = "images/logodict.png" border="0" alt="easydefine" onmouseover="document.body.style.cursor = 'pointer';" onmouseout="document.body.style.cursor = 'default';" onclick="javascript:window.location='?p=home'"></img>--></div>
+<img style="display:none;" src = "images/email.png" border="0" alt = "Email list to yourself"></img>
+
+
+
+<div id="tabbed_box_1" class="tabbed_box" >
+	<div align="center" style="margin-top:31px;margin-bottom:9px;"><a href="http://www.easydefine.com"><img style="border:0" src="images/easydefinelogo.gif"  alt="Easy Define" /></a><!--<small style="float:left;">Select a Tab</small>--></div>
+    <br />
+	<div class="tabbed_area">
+
+
+        <ul class="tabs">
+            <li><a href="#" title="Home" class="tab active">Home</a></li>
+            <li><a href="#" id="c2" title="List" class="tab">List</a></li>
+			<li><a href="#" title="Extras" class="tab">Extras</a></li>
+			<li><a href="#" title="How to use" class="tab">How to Use</a></li>
+			<li><a href="#" title="About" class="tab">About</a></li>
+
+        </ul>
+
+        <div id="Home" class="content">
+			<div align="center">
+
+					<div align="center"><div align="left" style="font-family:Arial; font-size:9px; margin:0px; padding-left:32px; color:#808080;float:left;">ENTER WORD LIST BELOW:</div>
+					<!--
+					<div style="float:right;">
+					<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+						<input type="hidden" name="cmd" value="_s-xclick">
+						<input type="hidden" name="hosted_button_id" value="UG76Z3573LGMJ">
+						<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+						<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+					</form>
+
+					</div>
+					-->
+					<br /><textarea id="p1" name="par1" rows="20" cols="37"></textarea>
+
+
+
+						<div align="right" style="font-size:12px;padding-right:33px;padding-top:7px;padding-bottom:8px;">
+						<!-- AddThis Button BEGIN -->
+							<div class="addthis_toolbox addthis_default_style" style="float: left; margin-left: 32px;" >
+							<a href="http://www.addthis.com/bookmark.php?v=250&amp;username=carfreak602" class="addthis_button_compact">Share</a>
+							<span class="addthis_separator">|</span>
+							<a class="addthis_button_preferred_1"></a>
+							<a class="addthis_button_preferred_2"></a>
+							<a class="addthis_button_preferred_3"></a>
+							<a class="addthis_button_preferred_4"></a>
+							</div>
+							<script type="text/javascript">var addthis_config = {"data_track_clickback":true};</script>
+							<script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=carfreak602"></script>
+						<!-- AddThis Button END -->
+						<a  style="float:right;" id="modal" href="#" > Advanced Options </a>
+						</div>
+
+
+					</div>
+					<br />
+					<div align="center"><img id="ima"  src="images/button.png"  alt="Generate!" onmouseover="document.body.style.cursor = 'pointer';" onmouseout="document.body.style.cursor = 'default';"></img></div>
+			        <div align="center">
+										</div>
+			</div>
+        </div>
+        <div id="List" class="content">
+			<!--<label class="grey" for="listname">List Name</label>
+			<input class="field" type="text" name="listname" id="listname" size="20" />
+			<input type="submit" name="submit" value="Store This List"  /><br /><br />-->
+		   <div align="left" id="content_new"></div><br />
+		   <div align="center">
+		   <img src = "images/dl.png" border="0" alt = "Download a word document!" onmouseover="document.body.style.cursor = 'pointer'" onmouseout="document.body.style.cursor ='default'" onclick="javascript:window.location='?p=download';"></img>
+		   <img id = "email12" class = "e" src = "images/email.png" border="0" alt = "Email list to yourself" onmouseover="document.body.style.cursor = 'pointer'" onmouseout="document.body.style.cursor ='default'"></img>
+		   <img id = "quick" src = "images/quickdefine.png" border="0" alt = "Show only 2 definitions per word." onmouseover="document.body.style.cursor = 'pointer'" onmouseout="document.body.style.cursor ='default'"></img>
+
+		   </div>
+		</div>
+
+
+
+		<div id="Extras" class="content">
+
+		   <div id="container">
+		   <div id="temploader2" align="center"></div>
+				<ul id="list">
+					<li><a href="#">Synonyms</a></li>
+					<li><a href="#">Quiz Yourself</a></li>
+					<li><a href="?p=flashcards">Generate flashcards</a></li>
+					<li><a href="#">Generate worksheets</a></li>
+					<!--<li><a href="#">Item five</a></li>-->
+				</ul>
+			</div>
+
+			<div id= "content_container" align="left">
+				<a id="back" href="#" style="text-transform:uppercase; font-size:10px;">Back to Extras page</a>
+				<a id="back1" href="#" style="text-transform:uppercase; font-size:10px;">Back to Quizzes page</a>
+				<h3 id="title_for_tab" align="center" style="font-family:verdana;font-size:12px;text-transform:uppercase;"> </h3>
+				<div id = "quizlinks">
+				<div id="loadingbox"> </div>
+				<ul id= "list2">
+				<li><a href="#" id="quiz1">Definitions Matching</a></li>
+				<li><a href="#" id="quiz2">Definitions True or False</a></li>
+				<li><a href="#" id="quiz3">Definitions Multiple Choice</a></li>
+				<li><a href="#" id="quiz4">Synonyms Matching</a></li>
+				<li><a href="#" id="quiz5">Synonyms True or False</a></li>
+				<li><a href="#" id="quiz6">Synonyms Multiple Choice</a></li>
+				</ul>
+				</div>
+				<div id="loadingbox1"> </div>
+				<div id= "content_here" >
+
+
+				</div>
+
+				<div align="center"><a href="#" id="submitquiz">Submit Quiz</a> </div>
+				<div align="center" style="margin-top:20px;"><a href="#" id="showAnswersForQuiz">Show Answers</a> </div>
+				<div id="links">
+					<div id="container1">
+					<div align="center" id="temploader"></div>
+						<ul id="list1">
+						<li><div><a href="#"  class= "def" id="wksht1" style="text-decoration:none;">Definitions Matching </a>  &nbsp;<br /><button class="2">View Online</button> <button class="1">Download Word File</button> </div></li>
+						<li><div><a href="#"  class= "def" id="wksht2" style="text-decoration:none;">Definitions True or False</a>  &nbsp;<br /><button class="2">View Online</button> <button class="1">Download Word File</button></div> </li>
+						<li><div><a href="#"  class= "def" id="wksht3" style="text-decoration:none;">Definitions Multiple Choice </a>  &nbsp;<br /><button class="2">View Online</button> <button class="1">Download Word File</button></div></li>
+						<li><div><a href="#"  class= "syn" id="wksht4" style="text-decoration:none;">Synonyms Matching  </a>  &nbsp;<br /><button class="2">View Online</button> <button class="1">Download Word File</button></div></li>
+						<li><div><a href="#"  class= "syn" id="wksht5" style="text-decoration:none;">Synonyms True or False  </a>  &nbsp;<br /><button class="2">View Online</button> <button class="1">Download Word File</button></div></li>
+						<li><div><a href="#"  class= "syn" id="wksht6" style="text-decoration:none;">Synonyms Multiple Choice  </a>  &nbsp;<br /><button class="2">View Online</button> <button class="1">Download Word File</button></div></li>
+						</ul>
+					</div>
+				</div>
+				<br />
+
+				<div id="imagesToFadeOut" align="center">
+				   <img src = "images/dl.png" border="0" alt = "Download a word document!" onmouseover="document.body.style.cursor = 'pointer'" onmouseout="document.body.style.cursor ='default'" onclick="javascript:window.location='?p=download';"></img>
+				   <img id = "email1" class="e" src = "images/email.png" border="0" alt = "Email list to yourself" onmouseover="document.body.style.cursor = 'pointer'" onmouseout="document.body.style.cursor ='default'"></img>
+			    </div>
+			</div>
+
+
+
+		   <br />
+
+
+
+		</div>
+
+
+
+        <div id="About" class="content">
+
+				<div  align="center"> <h2>About EasyDefine</h2> </div>
+				<div class="new" align="left"> EasyDefine was initially developed by Prabhav with the intention of reducing the time people spend looking up vocabulary words. With this website there is no need
+				 to spend countless hours looking up definitions. All one has to do is copy and paste the word list and all the words will be extracted and defined. Definitions are taken from <a href="http://wordnet.princeton.edu/">Princeton's WordNet 3.0</a>.
+				EasyDefine is coded in PHP, AJAX and javascript (jQuery), using a MySQL database to store word definitions. Graphic design was done via Adobe Photoshop CS3, and CSS.
+				</div>
+				<div  align="center"> <h2>Developers</h2> </div>
+				<div class="new" align="left">EasyDefine was the brainchild of Prabhav Jain. He got so tired of spending excessive time looking up the definitions of many words that he developed the idea and code for an automatic and quick dictionary. He launched EasyDefine in 2009 in association with Chris Choi. The programming (PHP, AJAX, Javascript (JQuery), MySQL, HTML), interface, and graphics scheme (via CSS) is done by Prabhav Jain and the graphics (via Photoshop) by Chris Choi. The site is maintained by Prabhav.
+				</div>
+				<div  align="center"> <h2>Contact</h2> </div>
+				<div class="new" align="left"> Send any questions, comments, suggestions, or requests to info@easydefine.com</div>
+
+				<div  align="center"> <h2>Citation (From Wordnet)</h2> </div>
+				<div class="new" align="left"> Christiane Fellbaum (1998, ed.) WordNet: An Electronic Lexical Database. Cambridge, MA: MIT Press. </div>
+		</div>
+		<div id="How_to_use" class="content">
+				<div  align="left">
+				Using this website is very simple. Simply <b>copy and paste</b> a list of words into the text box.<!-- (using any of these delimeters (\-:,;�#@!�[space]). By delimeter, we mean
+				the way that your words are separated. --> Your list can be in <b>virtually any format</b>. Our heuristic algorithm will extract the words from the list you give us. For example you may have a list like: <br /><br />
+
+				<p style="font-size:11px;">1. edify- <br />2. predilection-<br />3. avant-garde-<br />4. paragon-<br />5. 10-membered-<br /></p>
+
+				<br />
+				Or this: <br /><br />
+				<p style="font-size:11px;">edify, predilection; avant-garde-, paragon,10-membered-</p>
+				<br />
+				<!--Here the delimeter is "-". --> To see the generated list, you can either click the 'generate' button found below your word list, or you can select 'List' from the tabs on the top. Our program will extract "edify", "predilection", "avant-garde", "paragon", and "10-membered" and look them up
+				for you.
+
+				<p>If you want to look up a word with 2 or more components such as "computerized axial tomography scanner", simply type in "computerized-axial-tomography-scanner" and we can interpret this appropriately.</p>
+
+				After that is done, we offer the list to you in its entirety for download as a word document, for viewing on the website itself, or for emailing to yourself.
+				<br />
+				<br/>
+
+				Under the '<b>Extras</b>' tab, you can look up <b>synonyms</b>, <b>quiz yourself</b>, <b>download flashcard</b> as well as <b>quizzes</b>.
+				<br />
+				<br/>
+				Also don't forget about our <b>advanced options</b> (located under the text box in the home tab) which give you options such as alphabetizing and numbering your list. You can specify the maximum number of definitions for each word and whether or not to randomly pick these definitions from the dictionary (for example picking 2 definitions out of a possible 10).
+
+				<br /><br />
+				<b>QuickDefine</b> is our cool new feature that offers a maximum of 2 definitions per word with the click of a button (under the List tab).
+				</div>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+<!--<p align="center"><span id= "pretty">This program recognizes any of these delimeter(,:;-#). </span><br /> <br />
+ </p>-->
+
+<div id="advancedopts">
+	<br /><br /><br /><br /><br />
+	<div align="left" style= "font-size:12px; font-family:Helvetica,Arial;padding-left:10px;">
+	<input type="checkbox" id = "numlist" name="numlist" style="vertical-align: middle;" value="n"  /> Number my list
+	<br /><br />
+	<div id="numlistshow" align="left" style= "font-size:10px; font-family:Arial; padding-left:25px;">
+		Number words for which definitions are not found?<br />
+		<input type="radio" id ="numlistyn" name="numlistyn" style="vertical-align: middle;" value="Yes"  checked="checked" /> Yes
+		<input type="radio" id ="numlistyn1" name="numlistyn" style="vertical-align: middle;" value = "No"  /> No
+		<br /><br />
+	</div>
+
+	<input type="checkbox" id="alpha" name="alpha" style="vertical-align: middle;"  /> Alphabetize my list
+	 <br /><br />   &nbsp; Maximum number of definitions for each word: <input type="text" name="max" id="max" size="1" value = ""/>
+	   <br />&nbsp;&nbsp; &nbsp; &nbsp;<span id="showonfocus"><input type="checkbox" id="random" name="random" 	    />Randomize these definitions<br /></span><br />
+
+	<input type ="checkbox" id="partof" name="partof" style="vertical-align: middle;"  /> Hide part of speech
+	<br />
+	<a href='#' align="center" style="padding-left:120px;" id="clo">Submit</a>
+	<p align="center"><a href='#' id="close12" class='simplemodal-close'></a></p>
+	</div>
+</div>
+
+<div id="emailassoc">
+<br /><br /><br /><br />
+
+<div align="center">
+To: <input type="text" id="to" name="to" value="" />&nbsp;&nbsp;<a id="emailconf"><b>submit</b></a></div>
+
+<div id="conf" style="padding:10px;"> </div>
+</div>
+
+
+</form>
+</div>
+</td>
+	<td width="25%">
+		<div align="center" style="margin-top:80px;">
+
+			<script type="text/javascript">
+			<!--
+			google_ad_client = "pub-9291870391995910";
+			/* 160x600, created 7/1/10 */
+			google_ad_slot = "6099760758";
+			google_ad_width = 160;
+			google_ad_height = 600;
+			-->
+			</script>
+			<script type="text/javascript"
+			src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+			</script>
+
+
+
+		</div>
+	</td>
+</tr>
+</table>
+
+
+
+<!--<p align="center"><script type="text/javascript" src="http://tpclubs.com/easydefine/modules/counter/graphcount.php?page=main">
+</script></p>-->
+<!--   <p align="center"><img
+        src="http://www.w3.org/Icons/valid-xhtml10-blue"
+        alt="Valid XHTML 1.0 Transitional" height="31" width="88" onmouseover="document.body.style.cursor = 'pointer';"
+		onmouseout="document.body.style.cursor = 'default';"
+		onclick="javascript:window.location='http://validator.w3.org/check?uri=referer'"
+		/>
+  </p> -->
+
+<div style="font-size:10px; color:#595454;clear:both;" align="center">&copy; 2008-2010 <b>Prabhav Jain</b> with Photoshop by Chris Choi. All rights reserved.</div>
+<div align="center">
+			<br />
+				<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+						<input type="hidden" name="cmd" value="_s-xclick">
+						<input type="hidden" name="hosted_button_id" value="UG76Z3573LGMJ">
+						<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+						<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+					</form>
+				</div>
+
+</body>
+</html>
